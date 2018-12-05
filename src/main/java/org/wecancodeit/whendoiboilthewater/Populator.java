@@ -77,10 +77,32 @@ public class Populator extends Cookbook implements CommandLineRunner {
 		addStepsToRecipe(recipe4, step16, step17, step18, step19, step20, step21);
 
 		addIngredientsToRecipe(recipe1, farfalle, popRocks, hotDog);
+		recipe1.addIngredientToList(farfalle, "1 cup");
+		recipe1.addIngredientToList(popRocks, "2 packets");
+		recipe1.addIngredientToList(hotDog, "10");
+		recipe1.showIngredientsList();
+		recipeRepo.save(recipe1);
 		addIngredientsToRecipe(recipe2, cheeto);
+		recipe2.addIngredientToList(cheeto, "1");
+		recipeRepo.save(recipe2);
 		addIngredientsToRecipe(recipe3, navyBean, pintoBean, lightKidneyBean, darkKidneyBean, garbanzoBean, butterBean,
 				bakedBean, favaBean, cannelliniBean, flageoletBean);
+		recipe3.addIngredientToList(navyBean, "1");
+		recipe3.addIngredientToList(pintoBean, "1");
+		recipe3.addIngredientToList(lightKidneyBean, "1");
+		recipe3.addIngredientToList(darkKidneyBean, "1");
+		recipe3.addIngredientToList(garbanzoBean, "1");
+		recipe3.addIngredientToList(butterBean, "1");
+		recipe3.addIngredientToList(bakedBean, "1");
+		recipe3.addIngredientToList(favaBean, "1");
+		recipe3.addIngredientToList(cannelliniBean, "1");
+		recipe3.addIngredientToList(flageoletBean, "1");
+		recipeRepo.save(recipe3);
 		addIngredientsToRecipe(recipe4, hotDog, milk, tapiocaBall);
+		recipe4.addIngredientToList(hotDog, "3");
+		recipe4.addIngredientToList(milk, "1 gulp");
+		recipe4.addIngredientToList(tapiocaBall, "1 Scoop");
+		recipeRepo.save(recipe4);
 
 		addRecipesToMeal(meal1, recipe1, recipe2);
 		addRecipesToMeal(meal2, recipe3, recipe4);

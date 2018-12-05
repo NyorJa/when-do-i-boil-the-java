@@ -1,7 +1,5 @@
 package org.wecancodeit.whendoiboilthewater.controllers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import org.json.JSONArray;
@@ -23,11 +21,10 @@ import org.wecancodeit.whendoiboilthewater.repository.MealRepository;
 import org.wecancodeit.whendoiboilthewater.repository.RecipeRepository;
 import org.wecancodeit.whendoiboilthewater.repository.StepRepository;
 
-
 @CrossOrigin
 @RestController
 public class ApiController {
-	
+
 	@Autowired
 	RecipeRepository recipeRepo;
 	@Autowired
@@ -36,72 +33,73 @@ public class ApiController {
 	StepRepository stepRepo;
 	@Autowired
 	MealRepository mealRepo;
-	
+
 	@GetMapping("/api/meals")
 	public Collection<Meal> showMeals() {
 		return (Collection<Meal>) mealRepo.findAll();
 	}
-	
+
 	@GetMapping("/api/meals/{mealId}")
 	public Meal showMeal(@PathVariable(value = "mealId") Long mealId) {
 		return mealRepo.findById(mealId).get();
-		}
-	
+	}
+
 	@GetMapping("/api/meals/{mealId}/recipes")
-	public Collection<Recipe> showMealRecipes(@PathVariable(value = "mealId")Long mealId){
+	public Collection<Recipe> showMealRecipes(@PathVariable(value = "mealId") Long mealId) {
 		return mealRepo.findById(mealId).get().getRecipes();
 	}
-	
+
 	@GetMapping("/api/meals/{mealId}/recipes/{recipeId}")
-	public Recipe showMealRecipe(@PathVariable(value = "mealId")Long mealId, @PathVariable(value = "recipeId") Long recipeId){
+	public Recipe showMealRecipe(@PathVariable(value = "mealId") Long mealId,
+			@PathVariable(value = "recipeId") Long recipeId) {
 		return recipeRepo.findById(recipeId).get();
 	}
-	
+
 	@GetMapping("/api/recipes")
 	public Collection<Recipe> showRecipes() {
 		return (Collection<Recipe>) recipeRepo.findAll();
 	}
-	
+
 	@GetMapping("/api/recipes/{recipeId}")
 	public Recipe showRecipe(@PathVariable(value = "recipeId") Long recipeId) {
 		return recipeRepo.findById(recipeId).get();
 	}
-	
+
 	@GetMapping("/api/recipes/{recipeId}/steps")
-	public Collection<Step> showRecipeSteps(@PathVariable(value = "recipeId")Long recipeId) {
+	public Collection<Step> showRecipeSteps(@PathVariable(value = "recipeId") Long recipeId) {
 		return (Collection<Step>) recipeRepo.findById(recipeId).get().getSteps();
 	}
-	
+
 	@GetMapping("/api/recipes/{recipeId}/ingredients")
 	public Collection<Ingredient> showRecipeIngredient(@PathVariable(value = "recipeId") Long recipeId) {
 		return (Collection<Ingredient>) recipeRepo.findById(recipeId).get().getIngredients();
 	}
-	
+
 	@GetMapping("/api/ingredients")
-	public Collection<Ingredient> showIngredients(){
+	public Collection<Ingredient> showIngredients() {
 		return (Collection<Ingredient>) ingredientRepo.findAll();
 	}
-	
+
 	@GetMapping("/api/ingredients/{ingredientId}")
-	public Ingredient showIngredient(@PathVariable(value = "ingredientId")Long ingredientId){
+	public Ingredient showIngredient(@PathVariable(value = "ingredientId") Long ingredientId) {
 		return ingredientRepo.findById(ingredientId).get();
 	}
-	
+
 	@PostMapping("/api/meals/add")
 	public Meal createMeal(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		String mealName = json.getString("mealName");
 		Meal meal = new Meal(mealName);
 		JSONArray recipeArray = json.getJSONArray("recipes");
-		for(int i = 0; i < recipeArray.length(); i++) {
+		for (int i = 0; i < recipeArray.length(); i++) {
 			meal.addRecipe(recipeRepo.findById(recipeArray.getJSONObject(i).getLong("recipeId")).get());
 		}
 		mealRepo.save(meal);
 		return meal;
 	}
-	
+
 	@PostMapping("/api/meals/addRecipe")
-	public Meal addRecipeToMeal(@RequestBody String body) throws JSONException{
+	public Meal addRecipeToMeal(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		Long mealId = json.getLong("mealId");
 		Long recipeId = json.getLong("recipeId");
@@ -111,14 +109,12 @@ public class ApiController {
 		mealRepo.save(meal);
 		return meal;
 	}
-	
+
 	@PostMapping("/api/meals/removeRecipe")
-	public void removeRecipe(@RequestBody String body) throws JSONException{
+	public void removeRecipe(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		Long mealId = json.getLong("mealId");
 		mealRepo.delete(mealRepo.findById(mealId).get());
 	}
-	
+
 }
-
-

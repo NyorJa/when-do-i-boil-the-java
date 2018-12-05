@@ -2,7 +2,6 @@ package org.wecancodeit.whendoiboilthewater;
 
 import javax.annotation.Resource;
 
-import org.springframework.boot.CommandLineRunner;
 import org.wecancodeit.whendoiboilthewater.model.Ingredient;
 import org.wecancodeit.whendoiboilthewater.model.Meal;
 import org.wecancodeit.whendoiboilthewater.model.Recipe;
@@ -53,19 +52,28 @@ public class Cookbook {
 		}
 	}
 
-	private void addMealRecipe(Recipe recipeToAdd, Meal mealToAddRecipeTo) {
+	protected void addMealRecipe(Recipe recipeToAdd, Meal mealToAddRecipeTo) {
 		mealToAddRecipeTo.addRecipe(recipeToAdd);
 		mealRepo.save(mealToAddRecipeTo);
 	}
 
-	private void addRecipeIngredient(Ingredient ingredientToAdd, Recipe recipeToAddIngredientTo) {
+	protected void addRecipeIngredient(Ingredient ingredientToAdd, Recipe recipeToAddIngredientTo) {
 		recipeToAddIngredientTo.addIngredient(ingredientToAdd);
 		ingredientToAdd.addRecipe(recipeToAddIngredientTo);
 		recipeRepo.save(recipeToAddIngredientTo);
 		ingredientRepo.save(ingredientToAdd);
 	}
 
-	private void addRecipeStep(Step stepToAdd, Recipe recipeToAddStepTo) {
+	protected void addRecipeIngredientWithQuantity(Ingredient ingredientToAdd, String ingredientQuantity,
+			Recipe recipeToAddIngredientTo) {
+		recipeToAddIngredientTo.addIngredient(ingredientToAdd);
+		recipeToAddIngredientTo.addIngredientToList(ingredientToAdd, ingredientQuantity);
+		ingredientToAdd.addRecipe(recipeToAddIngredientTo);
+		recipeRepo.save(recipeToAddIngredientTo);
+		ingredientRepo.save(ingredientToAdd);
+	}
+
+	protected void addRecipeStep(Step stepToAdd, Recipe recipeToAddStepTo) {
 		recipeToAddStepTo.addStep(stepToAdd);
 		stepToAdd.addRecipe(recipeToAddStepTo);
 		recipeRepo.save(recipeToAddStepTo);
