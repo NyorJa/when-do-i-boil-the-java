@@ -89,10 +89,15 @@ public class ApiController {
 	
 	@PostMapping("/api/meals/add")
 	public Meal createMeal(@RequestBody String body) throws JSONException {
-		System.out.println(body);
 		JSONObject json = new JSONObject(body);
-		String name = json.getString("mealName");
-		Meal meal = new Meal(name);
+
+    String mealName = json.getString("mealName");
+		Meal meal = new Meal(mealName);
+		JSONArray recipeArray = json.getJSONArray("recipes");
+		for(int i = 0; i < recipeArray.length(); i++) {
+			meal.addRecipe(recipeRepo.findById(recipeArray.getJSONObject(i).getLong("recipeId")).get());
+		}
+
 		mealRepo.save(meal);
 		return meal;
 	}
