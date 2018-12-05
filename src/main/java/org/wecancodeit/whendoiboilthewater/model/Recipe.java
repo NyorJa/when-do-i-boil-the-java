@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,13 +26,15 @@ public class Recipe {
 	private Long length;
 	@OneToMany(mappedBy = "recipe")
 	private List<Step> steps = new ArrayList<Step>();
-	@JsonIgnore
-	@ManyToMany
-	private Collection<Ingredient> ingredients = new HashSet<Ingredient>();
+//	@JsonIgnore
+//	@ManyToMany
+//	private Collection<Ingredient> ingredients = new HashSet<Ingredient>();
+	@Embedded
+	private IngredientsList ingredientsList;
 	@JsonIgnore
 	@ManyToMany
 	private Collection<Meal> meals = new HashSet<Meal>();
-	private HashMap<Ingredient, String> ingredientsList = new HashMap<>();
+//	private HashMap<Ingredient, String> ingredientsList = new HashMap<>();
 
 	public Recipe() {
 	}
@@ -51,9 +54,9 @@ public class Recipe {
 		return steps;
 	}
 
-	public Collection<Ingredient> getIngredients() {
-		return ingredients;
-	}
+//	public Collection<Ingredient> getIngredients() {
+//		return ingredients;
+//	}
 
 	public Long getLength() {
 		return length;
@@ -86,24 +89,27 @@ public class Recipe {
 		length = calculateLength();
 	}
 
-	public void addIngredient(Ingredient ingredient) {
-		ingredients.add(ingredient);
-	}
+//	public void addIngredient(Ingredient ingredient) {
+//		ingredients.add(ingredient);
+//	}
 
-	public void addIngredientToList(Ingredient ingredientToAdd, String ingredientQuantity) {
-		ingredientsList.put(ingredientToAdd, ingredientQuantity);
-	}
+//	public void addIngredientToList(Ingredient ingredientToAdd, String ingredientQuantity) {
+//		ingredientsList.put(ingredientToAdd, ingredientQuantity);
+//	}
 
-	public String showIngredientsList() {
-		String ingredientsListEntries = "";
-		for (Ingredient key : ingredientsList.keySet()) {
-			String ingredientsListEntry;
-			ingredientsListEntry = ingredientsList.get(key) + " " + key.getName() + "\n";
-			ingredientsListEntries += ingredientsListEntry;
-		}
-		System.out.println(ingredientsListEntries);
-		return ingredientsListEntries;
-	}
+//	public String showIngredientsList() {
+//		String ingredientsListEntries = "";
+//		for (Ingredient key : ingredientsList.keySet()) {
+//			String ingredientsListEntry;
+//			ingredientsListEntry = ingredientsList.get(key) + " " + key.getName() + "\n";
+//			ingredientsListEntries += ingredientsListEntry;
+//		}
+//		return ingredientsListEntries;
+//	}
+
+//	public HashMap<Ingredient, String> getIngredientsList() {
+//		return ingredientsList;
+//	}
 
 	public Long calculateLength() {
 		Long longestStepTime = 0L;

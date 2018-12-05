@@ -13,8 +13,8 @@ import org.wecancodeit.whendoiboilthewater.repository.StepRepository;
 
 public class Cookbook {
 
-	@Resource
-	IngredientRepository ingredientRepo;
+//	@Resource
+//	IngredientRepository ingredientRepo;
 	@Resource
 	MealRepository mealRepo;
 	@Resource
@@ -30,15 +30,15 @@ public class Cookbook {
 		return stepRepo.save(new Step(stepLength, stepDescription));
 	}
 
-	protected Ingredient addNewIngredient(String ingredientName) {
-		return ingredientRepo.save(new Ingredient(ingredientName));
-	}
+//	protected Ingredient addNewIngredient(String ingredientName) {
+//		return ingredientRepo.save(new Ingredient(ingredientName));
+//	}
 
-	protected void addIngredientsToRecipe(Recipe recipe, Ingredient... ingredientsToAdd) {
-		for (int i = 0; i < ingredientsToAdd.length; i++) {
-			addRecipeIngredient(ingredientsToAdd[i], recipe);
-		}
-	}
+//	protected void addIngredientsToRecipe(Recipe recipe, Ingredient... ingredientsToAdd) {
+//		for (int i = 0; i < ingredientsToAdd.length; i++) {
+//			addRecipeIngredient(ingredientsToAdd[i], recipe);
+//		}
+//	}
 
 	protected void addStepsToRecipe(Recipe recipe, Step... stepsToAdd) {
 		for (int i = 0; i < stepsToAdd.length; i++) {
@@ -57,21 +57,21 @@ public class Cookbook {
 		mealRepo.save(mealToAddRecipeTo);
 	}
 
-	protected void addRecipeIngredient(Ingredient ingredientToAdd, Recipe recipeToAddIngredientTo) {
-		recipeToAddIngredientTo.addIngredient(ingredientToAdd);
-		ingredientToAdd.addRecipe(recipeToAddIngredientTo);
-		recipeRepo.save(recipeToAddIngredientTo);
-		ingredientRepo.save(ingredientToAdd);
-	}
-
-	protected void addRecipeIngredientWithQuantity(Ingredient ingredientToAdd, String ingredientQuantity,
-			Recipe recipeToAddIngredientTo) {
-		recipeToAddIngredientTo.addIngredient(ingredientToAdd);
-		recipeToAddIngredientTo.addIngredientToList(ingredientToAdd, ingredientQuantity);
-		ingredientToAdd.addRecipe(recipeToAddIngredientTo);
-		recipeRepo.save(recipeToAddIngredientTo);
-		ingredientRepo.save(ingredientToAdd);
-	}
+//	protected void addRecipeIngredient(Ingredient ingredientToAdd, Recipe recipeToAddIngredientTo) {
+//		recipeToAddIngredientTo.addIngredient(ingredientToAdd);
+//		ingredientToAdd.addRecipe(recipeToAddIngredientTo);
+//		recipeRepo.save(recipeToAddIngredientTo);
+//		ingredientRepo.save(ingredientToAdd);
+//	}
+//
+//	protected void addRecipeIngredientWithQuantity(Ingredient ingredientToAdd, String ingredientQuantity,
+//			Recipe recipeToAddIngredientTo) {
+//		recipeToAddIngredientTo.addIngredient(ingredientToAdd);
+//		recipeToAddIngredientTo.addIngredientToList(ingredientToAdd, ingredientQuantity);
+//		ingredientToAdd.addRecipe(recipeToAddIngredientTo);
+//		recipeRepo.save(recipeToAddIngredientTo);
+//		ingredientRepo.save(ingredientToAdd);
+//	}
 
 	protected void addRecipeStep(Step stepToAdd, Recipe recipeToAddStepTo) {
 		recipeToAddStepTo.addStep(stepToAdd);
