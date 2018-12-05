@@ -105,12 +105,35 @@ public class ApiController {
 		mealRepo.save(meal);
 		return meal;
 	}
-
-	@PostMapping("/api/meals/removeRecipe")
-	public void removeRecipe(@RequestBody String body) throws JSONException {
+	
+	@PostMapping("api/meals/updateName")
+	public Meal updateMealName(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String mealName = json.getString("mealName");
+		Long mealId = json.getLong("mealId");
+		Meal meal = mealRepo.findById(mealId).get();
+		meal.setName(mealName);
+		mealRepo.save(meal);
+		return meal;
+	}
+	
+	@PostMapping("/api/meals/remove")
+	public Collection<Meal> removeMeal(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		Long mealId = json.getLong("mealId");
 		mealRepo.delete(mealRepo.findById(mealId).get());
+		return (Collection<Meal>) mealRepo.findAll();
 	}
-
+	
+	@PostMapping("/api/recipes/remove")
+	public Meal removeRecipes(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		Long mealId = json.getLong("mealId");
+		Long recipeId = json.getLong("recipeId");
+		Recipe recipe = recipeRepo.findById(recipeId).get();
+		Meal meal = mealRepo.findById(mealId).get();
+		meal.removeRecipe(recipe);
+		mealRepo.save(meal);
+		return meal;
+	}
 }
