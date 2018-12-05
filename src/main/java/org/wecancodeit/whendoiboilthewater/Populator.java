@@ -19,22 +19,22 @@ public class Populator extends Cookbook implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Ingredient farfalle = addNewIngredient("farfalle");
-		Ingredient popRocks = addNewIngredient("Pop Rocks");
-		Ingredient hotDog = addNewIngredient("Hot Dogs");
-		Ingredient cheeto = addNewIngredient("cheeto");
-		Ingredient navyBean = addNewIngredient("addNewIngredientNavy Bean");
-		Ingredient pintoBean = addNewIngredient("Pinto Bean");
-		Ingredient lightKidneyBean = addNewIngredient("Light Kidney Bean");
-		Ingredient darkKidneyBean = addNewIngredient("Dark Kidney Bean");
-		Ingredient garbanzoBean = addNewIngredient("Garbanzo Bean");
-		Ingredient butterBean = addNewIngredient("Butter Bean");
-		Ingredient bakedBean = addNewIngredient("Baked Bean");
-		Ingredient favaBean = addNewIngredient("Fava Bean");
-		Ingredient cannelliniBean = addNewIngredient("Cannellini Bean");
-		Ingredient flageoletBean = addNewIngredient("Flageolet Bean");
-		Ingredient milk = addNewIngredient("Milk");
-		Ingredient tapiocaBall = addNewIngredient("Tapioca Balls");
+//		Ingredient farfalle = addNewIngredient("farfalle");
+//		Ingredient popRocks = addNewIngredient("Pop Rocks");
+//		Ingredient hotDog = addNewIngredient("Hot Dogs");
+//		Ingredient cheeto = addNewIngredient("cheeto");
+//		Ingredient navyBean = addNewIngredient("addNewIngredientNavy Bean");
+//		Ingredient pintoBean = addNewIngredient("Pinto Bean");
+//		Ingredient lightKidneyBean = addNewIngredient("Light Kidney Bean");
+//		Ingredient darkKidneyBean = addNewIngredient("Dark Kidney Bean");
+//		Ingredient garbanzoBean = addNewIngredient("Garbanzo Bean");
+//		Ingredient butterBean = addNewIngredient("Butter Bean");
+//		Ingredient bakedBean = addNewIngredient("Baked Bean");
+//		Ingredient favaBean = addNewIngredient("Fava Bean");
+//		Ingredient cannelliniBean = addNewIngredient("Cannellini Bean");
+//		Ingredient flageoletBean = addNewIngredient("Flageolet Bean");
+//		Ingredient milk = addNewIngredient("Milk");
+//		Ingredient tapiocaBall = addNewIngredient("Tapioca Balls");
 
 		Step step1 = addNewStep(600L, "boil the pop rocks");
 		Step step2 = addNewStep(300L, "dice the hot dogs");
@@ -76,11 +76,32 @@ public class Populator extends Cookbook implements CommandLineRunner {
 				step15);
 		addStepsToRecipe(recipe4, step16, step17, step18, step19, step20, step21);
 
-		addIngredientsToRecipe(recipe1, farfalle, popRocks, hotDog);
-		addIngredientsToRecipe(recipe2, cheeto);
-		addIngredientsToRecipe(recipe3, navyBean, pintoBean, lightKidneyBean, darkKidneyBean, garbanzoBean, butterBean,
-				bakedBean, favaBean, cannelliniBean, flageoletBean);
-		addIngredientsToRecipe(recipe4, hotDog, milk, tapiocaBall);
+//		addIngredientsToRecipe(recipe1, farfalle, popRocks, hotDog);
+//		recipe1.addIngredientToList(farfalle, "1 cup");
+//		recipe1.addIngredientToList(popRocks, "2 packets");
+//		recipe1.addIngredientToList(hotDog, "10");
+//		recipe1.showIngredientsList();
+//
+//		addIngredientsToRecipe(recipe2, cheeto);
+//		recipe2.addIngredientToList(cheeto, "1");
+//
+//		addIngredientsToRecipe(recipe3, navyBean, pintoBean, lightKidneyBean, darkKidneyBean, garbanzoBean, butterBean,
+//				bakedBean, favaBean, cannelliniBean, flageoletBean);
+//		recipe3.addIngredientToList(navyBean, "1");
+//		recipe3.addIngredientToList(pintoBean, "1");
+//		recipe3.addIngredientToList(lightKidneyBean, "1");
+//		recipe3.addIngredientToList(darkKidneyBean, "1");
+//		recipe3.addIngredientToList(garbanzoBean, "1");
+//		recipe3.addIngredientToList(butterBean, "1");
+//		recipe3.addIngredientToList(bakedBean, "1");
+//		recipe3.addIngredientToList(favaBean, "1");
+//		recipe3.addIngredientToList(cannelliniBean, "1");
+//		recipe3.addIngredientToList(flageoletBean, "1");
+//
+//		addIngredientsToRecipe(recipe4, hotDog, milk, tapiocaBall);
+//		recipe4.addIngredientToList(hotDog, "3");
+//		recipe4.addIngredientToList(milk, "1 gulp");
+//		recipe4.addIngredientToList(tapiocaBall, "1 Scoop");
 
 		addRecipesToMeal(meal1, recipe1, recipe2);
 		addRecipesToMeal(meal2, recipe3, recipe4);

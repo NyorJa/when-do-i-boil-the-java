@@ -2,9 +2,11 @@ package org.wecancodeit.whendoiboilthewater.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,23 +17,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Recipe {
-	@GeneratedValue @Id private Long id;
-	private String name;	
+	@GeneratedValue
+	@Id
+	private Long id;
+	private String name;
 	private int servingSize;
 	private String description;
 	private Long length;
 	@OneToMany(mappedBy = "recipe")
 	private List<Step> steps = new ArrayList<Step>();
-	@JsonIgnore @ManyToMany
-	private Collection<Ingredient> ingredients = new HashSet<Ingredient>();
-	@JsonIgnore @ManyToMany
+//	@JsonIgnore
+//	@ManyToMany
+//	private Collection<Ingredient> ingredients = new HashSet<Ingredient>();
+	@Embedded
+	private IngredientsList ingredientsList;
+	@JsonIgnore
+	@ManyToMany
 	private Collection<Meal> meals = new HashSet<Meal>();
-	
-	public Recipe() {}
-	
+//	private HashMap<Ingredient, String> ingredientsList = new HashMap<>();
 
-	
-	public Recipe( String name, int servingSize, String description) {
+	public Recipe() {
+	}
+
+	public Recipe(String name, int servingSize, String description) {
 		this.name = name;
 		this.servingSize = servingSize;
 		this.description = description;
@@ -46,9 +54,9 @@ public class Recipe {
 		return steps;
 	}
 
-	public Collection<Ingredient> getIngredients() {
-		return ingredients;
-	}
+//	public Collection<Ingredient> getIngredients() {
+//		return ingredients;
+//	}
 
 	public Long getLength() {
 		return length;
@@ -70,22 +78,39 @@ public class Recipe {
 		return description;
 	}
 
-	
-	//will we ever use this?
+	// will we ever use this?
 	public void addStep(String description, Long secBeforeEnd) {
 		steps.add(new Step(secBeforeEnd, description));
 		length = calculateLength();
 	}
-	
+
 	public void addStep(Step step) {
 		steps.add(step);
 		length = calculateLength();
 	}
-	
-	public void addIngredient(Ingredient ingredient) {
-		ingredients.add(ingredient);
-	}
-	
+
+//	public void addIngredient(Ingredient ingredient) {
+//		ingredients.add(ingredient);
+//	}
+
+//	public void addIngredientToList(Ingredient ingredientToAdd, String ingredientQuantity) {
+//		ingredientsList.put(ingredientToAdd, ingredientQuantity);
+//	}
+
+//	public String showIngredientsList() {
+//		String ingredientsListEntries = "";
+//		for (Ingredient key : ingredientsList.keySet()) {
+//			String ingredientsListEntry;
+//			ingredientsListEntry = ingredientsList.get(key) + " " + key.getName() + "\n";
+//			ingredientsListEntries += ingredientsListEntry;
+//		}
+//		return ingredientsListEntries;
+//	}
+
+//	public HashMap<Ingredient, String> getIngredientsList() {
+//		return ingredientsList;
+//	}
+
 	public Long calculateLength() {
 		Long longestStepTime = 0L;
 		for (Step step : steps) {
