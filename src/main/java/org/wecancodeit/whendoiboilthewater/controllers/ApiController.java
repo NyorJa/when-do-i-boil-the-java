@@ -91,7 +91,7 @@ public class ApiController {
 	public Meal createMeal(@RequestBody String body) throws JSONException {
 		System.out.println(body);
 		JSONObject json = new JSONObject(body);
-		String name = json.getString("name");
+		String name = json.getString("mealName");
 		Meal meal = new Meal(name);
 		mealRepo.save(meal);
 		return meal;
