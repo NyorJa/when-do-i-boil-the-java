@@ -16,6 +16,10 @@ public class Meal {
 	private Long length;
 	private String name;
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Meal() {}
 	
 	public Meal(String name) {
