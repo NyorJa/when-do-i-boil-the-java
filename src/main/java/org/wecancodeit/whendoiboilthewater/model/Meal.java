@@ -58,4 +58,9 @@ public class Meal {
 		this.length = calculateLength();
 	}
 	
+	public void removeRecipe(Recipe recipe) {
+		recipes.remove(recipe);
+		length = calculateLength();
+	}
+	
 }
