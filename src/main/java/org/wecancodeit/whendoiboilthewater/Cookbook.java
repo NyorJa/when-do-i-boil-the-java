@@ -38,27 +38,39 @@ public class Cookbook {
 		return ingredientRepo.save(new Ingredient(ingredientName, ingredientQuantity));
 	}
 
+	protected Recipe addNewRecipe(String recipeName, int servingSize, String recipeDescription) {
+		return recipeRepo.save(new Recipe(recipeName, servingSize, recipeDescription));
+	}
+
+	protected Meal addNewMeal(String mealName) {
+		return mealRepo.save(new Meal(mealName));
+	}
+
 	protected void addIngredientsToRecipe(Recipe recipe, Ingredient... ingredientsToAdd) {
 		for (int i = 0; i < ingredientsToAdd.length; i++) {
 			addRecipeIngredient(ingredientsToAdd[i], recipe);
+			ingredientRepo.save(ingredientsToAdd[i]);
 		}
+		recipeRepo.save(recipe);
 	}
 
 	protected void addStepsToRecipe(Recipe recipe, Step... stepsToAdd) {
 		for (int i = 0; i < stepsToAdd.length; i++) {
 			addRecipeStep(stepsToAdd[i], recipe);
+			stepRepo.save(stepsToAdd[i]);
 		}
+		recipeRepo.save(recipe);
 	}
 
 	protected void addRecipesToMeal(Meal meal, Recipe... recipesToAdd) {
 		for (int i = 0; i < recipesToAdd.length; i++) {
 			addMealRecipe(recipesToAdd[i], meal);
 		}
+		mealRepo.save(meal);
 	}
 
 	protected void addMealRecipe(Recipe recipeToAdd, Meal mealToAddRecipeTo) {
 		mealToAddRecipeTo.addRecipe(recipeToAdd);
-		mealRepo.save(mealToAddRecipeTo);
 	}
 
 	protected void addRecipeIngredient(Ingredient ingredientToAdd, Recipe recipeToAddIngredientTo) {
@@ -69,8 +81,6 @@ public class Cookbook {
 	protected void addRecipeStep(Step stepToAdd, Recipe recipeToAddStepTo) {
 		recipeToAddStepTo.addStep(stepToAdd);
 		stepToAdd.addRecipe(recipeToAddStepTo);
-		recipeRepo.save(recipeToAddStepTo);
-		stepRepo.save(stepToAdd);
 	}
 
 }

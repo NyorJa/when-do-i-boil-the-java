@@ -28,8 +28,8 @@ public class Populator extends Cookbook implements CommandLineRunner {
 		Ingredient favaBean = addNewIngredient("Fava Bean", "1");
 		Ingredient coffeeBean = addNewIngredient("Coffee Bean", "1");
 		Ingredient flageoletBean = addNewIngredient("Flageolet Bean", "1");
-		Ingredient milk = addNewIngredient("Milk", "1");
-		Ingredient tapiocaBall = addNewIngredient("Tapioca Balls", "1");
+		Ingredient milk = addNewIngredient("Milk", "1 gulp");
+		Ingredient tapiocaBall = addNewIngredient("Tapioca Balls", "1 metric unit");
 
 		Step step1 = addNewStep(600L, "boil the pop rocks");
 		Step step2 = addNewStep(300L, "dice the hot dogs");
@@ -45,7 +45,7 @@ public class Populator extends Cookbook implements CommandLineRunner {
 		Step step11 = addNewStep(30L, "add the Butter Bean to the bowl");
 		Step step12 = addNewStep(25L, "add the Baked Bean to the bowl");
 		Step step13 = addNewStep(20L, "add the Fava Bean to the bowl");
-		Step step14 = addNewStep(15L, "add the Cannellini Bean to the bowl");
+		Step step14 = addNewStep(15L, "add the Coffee Bean to the bowl");
 		Step step15 = addNewStep(10L, "add the FlageoletBean to the bowl");
 		Step step16 = addNewStep(67L, "steep the hotdogs in nearly boiling water");
 		Step step17 = addNewStep(42L, "remove hot dogs from water");
@@ -54,16 +54,14 @@ public class Populator extends Cookbook implements CommandLineRunner {
 		Step step20 = addNewStep(27L, "set aside hot dog milk tea");
 		Step step21 = addNewStep(7L, "add tapioca balls to hot dog milk tea");
 
-		Recipe recipe1 = recipeRepo.save(new Recipe("Hot Pop Rock Dog Stew", 12,
-				"A frothy, exciting treat for a cold summer night. 1 cup Pop Rocks, 4 Hot Dogs, 2 cup Farfalle"));
-		Recipe recipe2 = recipeRepo.save(new Recipe("Single Fried Cheeto", 4, "A delicacy."));
-		Recipe recipe3 = recipeRepo
-				.save(new Recipe("Quick 10-Bean Salad", 10, "Ten High Quality Beans for Ten High Quality Folks"));
-		Recipe recipe4 = recipeRepo.save(new Recipe("Hot Dog Milk Tea Boba", 10,
-				"Fancy bubble tea featuring your favorite of conglomerated meat products, the Hot Dog!"));
+		Recipe recipe1 = addNewRecipe("Hot Pop Rock Dog Stew", 12, "A frothy, exciting treat for a cold summer night.");
+		Recipe recipe2 = addNewRecipe("Single Fried Cheeto", 4, "A delicacy.");
+		Recipe recipe3 = addNewRecipe("Quick 10-Bean Salad", 10, "Ten High Quality Beans for Ten High Quality Folks");
+		Recipe recipe4 = addNewRecipe("Hot Dog Milk Tea Boba", 10,
+				"Fancy bubble tea featuring your favorite of conglomerated meat products, the Hot Dog!");
 
-		Meal meal1 = new Meal("Hot Poppin Cheeto Rockin");
-		Meal meal2 = new Meal("Quick Beans n Tea");
+		Meal meal1 = addNewMeal("Hot Poppin Cheeto Rockin");
+		Meal meal2 = addNewMeal("Quick Beans n Tea");
 
 		addStepsToRecipe(recipe1, step1, step2, step3);
 		addStepsToRecipe(recipe2, cheetoStep1);
@@ -72,33 +70,13 @@ public class Populator extends Cookbook implements CommandLineRunner {
 		addStepsToRecipe(recipe4, step16, step17, step18, step19, step20, step21);
 
 		addIngredientsToRecipe(recipe1, farfalle, popRocks, hotDog);
-		ingredientRepo.save(farfalle);
-		ingredientRepo.save(popRocks);
-		ingredientRepo.save(hotDog);
-		recipeRepo.save(recipe1);
 
 		addIngredientsToRecipe(recipe2, cheeto);
-		ingredientRepo.save(cheeto);
-		recipeRepo.save(recipe2);
 
 		addIngredientsToRecipe(recipe3, navyBean, pintoBean, lightKidneyBean, darkKidneyBean, garbanzoBean, butterBean,
 				bakedBean, favaBean, coffeeBean, flageoletBean);
-		ingredientRepo.save(navyBean);
-		ingredientRepo.save(pintoBean);
-		ingredientRepo.save(lightKidneyBean);
-		ingredientRepo.save(darkKidneyBean);
-		ingredientRepo.save(garbanzoBean);
-		ingredientRepo.save(bakedBean);
-		ingredientRepo.save(favaBean);
-		ingredientRepo.save(coffeeBean);
-		ingredientRepo.save(flageoletBean);
-		recipeRepo.save(recipe3);
 
 		addIngredientsToRecipe(recipe4, hotDog2, milk, tapiocaBall);
-		ingredientRepo.save(hotDog2);
-		ingredientRepo.save(milk);
-		ingredientRepo.save(tapiocaBall);
-		recipeRepo.save(recipe4);
 
 		addRecipesToMeal(meal1, recipe1, recipe2);
 		addRecipesToMeal(meal2, recipe3, recipe4);
