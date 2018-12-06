@@ -34,9 +34,6 @@ public class Ingredient {
 		this.quantity = quantity;
 	}
 
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
-	}
 
 	public Long getId() {
 		return id;
@@ -44,6 +41,10 @@ public class Ingredient {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getQuantity() {
+		return quantity;
 	}
 
 	public Collection<Recipe> getRecipes() {
