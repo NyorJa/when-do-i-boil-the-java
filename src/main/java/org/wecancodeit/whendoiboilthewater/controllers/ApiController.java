@@ -2,7 +2,6 @@ package org.wecancodeit.whendoiboilthewater.controllers;
 
 import java.util.Collection;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +104,7 @@ public class ApiController {
 		mealRepo.save(meal);
 		return meal;
 	}
-	
+
 	@PostMapping("api/meals/updateName")
 	public Meal updateMealName(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
@@ -116,7 +115,7 @@ public class ApiController {
 		mealRepo.save(meal);
 		return meal;
 	}
-	
+
 	@PostMapping("/api/meals/remove")
 	public Collection<Meal> removeMeal(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
@@ -124,7 +123,7 @@ public class ApiController {
 		mealRepo.delete(mealRepo.findById(mealId).get());
 		return (Collection<Meal>) mealRepo.findAll();
 	}
-	
+
 	@PostMapping("/api/recipes/remove")
 	public Meal removeRecipes(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);

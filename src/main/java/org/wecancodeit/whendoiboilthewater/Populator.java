@@ -1,17 +1,11 @@
 package org.wecancodeit.whendoiboilthewater;
 
-import javax.annotation.Resource;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.wecancodeit.whendoiboilthewater.model.Ingredient;
 import org.wecancodeit.whendoiboilthewater.model.Meal;
 import org.wecancodeit.whendoiboilthewater.model.Recipe;
 import org.wecancodeit.whendoiboilthewater.model.Step;
-import org.wecancodeit.whendoiboilthewater.repository.IngredientRepository;
-import org.wecancodeit.whendoiboilthewater.repository.MealRepository;
-import org.wecancodeit.whendoiboilthewater.repository.RecipeRepository;
-import org.wecancodeit.whendoiboilthewater.repository.StepRepository;
 
 @Service
 public class Populator extends Cookbook implements CommandLineRunner {
@@ -19,22 +13,23 @@ public class Populator extends Cookbook implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-//		Ingredient farfalle = addNewIngredient("farfalle");
-//		Ingredient popRocks = addNewIngredient("Pop Rocks");
-//		Ingredient hotDog = addNewIngredient("Hot Dogs");
-//		Ingredient cheeto = addNewIngredient("cheeto");
-//		Ingredient navyBean = addNewIngredient("addNewIngredientNavy Bean");
-//		Ingredient pintoBean = addNewIngredient("Pinto Bean");
-//		Ingredient lightKidneyBean = addNewIngredient("Light Kidney Bean");
-//		Ingredient darkKidneyBean = addNewIngredient("Dark Kidney Bean");
-//		Ingredient garbanzoBean = addNewIngredient("Garbanzo Bean");
-//		Ingredient butterBean = addNewIngredient("Butter Bean");
-//		Ingredient bakedBean = addNewIngredient("Baked Bean");
-//		Ingredient favaBean = addNewIngredient("Fava Bean");
-//		Ingredient cannelliniBean = addNewIngredient("Cannellini Bean");
-//		Ingredient flageoletBean = addNewIngredient("Flageolet Bean");
-//		Ingredient milk = addNewIngredient("Milk");
-//		Ingredient tapiocaBall = addNewIngredient("Tapioca Balls");
+		Ingredient farfalle = addNewIngredient("farfalle");
+		Ingredient popRocks = addNewIngredient("Pop Rocks");
+		Ingredient hotDog = addNewIngredient("Hot Dogs");
+		Ingredient hotDog2 = addNewIngredient("Hot Dogs", "1 desk");
+		Ingredient cheeto = addNewIngredient("cheeto");
+		Ingredient navyBean = addNewIngredient("Navy Bean", "1");
+		Ingredient pintoBean = addNewIngredient("Pinto Bean", "1");
+		Ingredient lightKidneyBean = addNewIngredient("Light Kidney Bean", "1");
+		Ingredient darkKidneyBean = addNewIngredient("Dark Kidney Bean", "1");
+		Ingredient garbanzoBean = addNewIngredient("Garbanzo Bean", "1");
+		Ingredient butterBean = addNewIngredient("Butter Bean", "1");
+		Ingredient bakedBean = addNewIngredient("Baked Bean", "1");
+		Ingredient favaBean = addNewIngredient("Fava Bean", "1");
+		Ingredient coffeeBean = addNewIngredient("Coffee Bean", "1");
+		Ingredient flageoletBean = addNewIngredient("Flageolet Bean", "1");
+		Ingredient milk = addNewIngredient("Milk", "1");
+		Ingredient tapiocaBall = addNewIngredient("Tapioca Balls", "1");
 
 		Step step1 = addNewStep(600L, "boil the pop rocks");
 		Step step2 = addNewStep(300L, "dice the hot dogs");
@@ -76,32 +71,34 @@ public class Populator extends Cookbook implements CommandLineRunner {
 				step15);
 		addStepsToRecipe(recipe4, step16, step17, step18, step19, step20, step21);
 
-//		addIngredientsToRecipe(recipe1, farfalle, popRocks, hotDog);
-//		recipe1.addIngredientToList(farfalle, "1 cup");
-//		recipe1.addIngredientToList(popRocks, "2 packets");
-//		recipe1.addIngredientToList(hotDog, "10");
-//		recipe1.showIngredientsList();
-//
-//		addIngredientsToRecipe(recipe2, cheeto);
-//		recipe2.addIngredientToList(cheeto, "1");
-//
-//		addIngredientsToRecipe(recipe3, navyBean, pintoBean, lightKidneyBean, darkKidneyBean, garbanzoBean, butterBean,
-//				bakedBean, favaBean, cannelliniBean, flageoletBean);
-//		recipe3.addIngredientToList(navyBean, "1");
-//		recipe3.addIngredientToList(pintoBean, "1");
-//		recipe3.addIngredientToList(lightKidneyBean, "1");
-//		recipe3.addIngredientToList(darkKidneyBean, "1");
-//		recipe3.addIngredientToList(garbanzoBean, "1");
-//		recipe3.addIngredientToList(butterBean, "1");
-//		recipe3.addIngredientToList(bakedBean, "1");
-//		recipe3.addIngredientToList(favaBean, "1");
-//		recipe3.addIngredientToList(cannelliniBean, "1");
-//		recipe3.addIngredientToList(flageoletBean, "1");
-//
-//		addIngredientsToRecipe(recipe4, hotDog, milk, tapiocaBall);
-//		recipe4.addIngredientToList(hotDog, "3");
-//		recipe4.addIngredientToList(milk, "1 gulp");
-//		recipe4.addIngredientToList(tapiocaBall, "1 Scoop");
+		addIngredientsToRecipe(recipe1, farfalle, popRocks, hotDog);
+		ingredientRepo.save(farfalle);
+		ingredientRepo.save(popRocks);
+		ingredientRepo.save(hotDog);
+		recipeRepo.save(recipe1);
+
+		addIngredientsToRecipe(recipe2, cheeto);
+		ingredientRepo.save(cheeto);
+		recipeRepo.save(recipe2);
+
+		addIngredientsToRecipe(recipe3, navyBean, pintoBean, lightKidneyBean, darkKidneyBean, garbanzoBean, butterBean,
+				bakedBean, favaBean, coffeeBean, flageoletBean);
+		ingredientRepo.save(navyBean);
+		ingredientRepo.save(pintoBean);
+		ingredientRepo.save(lightKidneyBean);
+		ingredientRepo.save(darkKidneyBean);
+		ingredientRepo.save(garbanzoBean);
+		ingredientRepo.save(bakedBean);
+		ingredientRepo.save(favaBean);
+		ingredientRepo.save(coffeeBean);
+		ingredientRepo.save(flageoletBean);
+		recipeRepo.save(recipe3);
+
+		addIngredientsToRecipe(recipe4, hotDog2, milk, tapiocaBall);
+		ingredientRepo.save(hotDog2);
+		ingredientRepo.save(milk);
+		ingredientRepo.save(tapiocaBall);
+		recipeRepo.save(recipe4);
 
 		addRecipesToMeal(meal1, recipe1, recipe2);
 		addRecipesToMeal(meal2, recipe3, recipe4);
