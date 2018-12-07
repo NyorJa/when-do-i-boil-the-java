@@ -31,9 +31,9 @@ public class Populator extends Cookbook implements CommandLineRunner {
 		Ingredient milk = addNewIngredient("Milk", "1 gulp");
 		Ingredient tapiocaBall = addNewIngredient("Tapioca Balls", "1 metric unit");
 
-		Step step1 = addNewStep(600L, "boil the pop rocks");
-		Step step2 = addNewStep(300L, "dice the hot dogs");
-		Step step3 = addNewStep(120L, "stir in the hot dogs");
+		Step step1 = addNewStep(15L, "boil the pop rocks");
+		Step step2 = addNewStep(10L, "dice the hot dogs");
+		Step step3 = addNewStep(5L, "stir in the hot dogs");
 		Step cheetoStep1 = addNewStep(66L, "Fry Cheeto");
 		Step step4 = addNewStep(65L, "boil all them beans hard AF");
 		Step step5 = addNewStep(60L, "drain all them beans");
