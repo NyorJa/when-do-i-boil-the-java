@@ -41,6 +41,24 @@ public class Recipe {
 		this.length = calculateLength();
 	}
 
+	public Recipe(String name, int servingSize) {
+		this.name = name;
+		this.servingSize = servingSize;
+		this.description = "A collection of food items intended for use in your mouth.";
+	}
+
+	public Recipe(String name, String description) {
+		this.name = name;
+		this.description = description;
+		this.servingSize = 2147483647;
+	}
+
+	public Recipe(String name) {
+		this.name = name;
+		this.description = "A collection of food items intended for use in your mouth";
+		this.servingSize = 2147483647;
+	}
+
 	public Long getId() {
 		return id;
 	}

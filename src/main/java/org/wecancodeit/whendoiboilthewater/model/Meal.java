@@ -11,24 +11,27 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Meal {
 
-	@GeneratedValue @Id private Long id;
-	@ManyToMany private Collection<Recipe> recipes = new HashSet<Recipe>();
+	@GeneratedValue
+	@Id
+	private Long id;
+	@ManyToMany
+	private Collection<Recipe> recipes = new HashSet<Recipe>();
 	private Long length;
 	private String name;
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public Meal() {
 	}
 
-	public Meal() {}
-	
 	public Meal(String name) {
 		this.name = name;
 	}
-	
 
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Long getId() {
@@ -52,15 +55,15 @@ public class Meal {
 		}
 		return totalLength;
 	}
-	
+
 	public void addRecipe(Recipe recipe) {
 		this.recipes.add(recipe);
 		this.length = calculateLength();
 	}
-	
+
 	public void removeRecipe(Recipe recipe) {
 		recipes.remove(recipe);
 		length = calculateLength();
 	}
-	
+
 }
