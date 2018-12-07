@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -20,6 +21,7 @@ public class Recipe {
 	private Long id;
 	private String name;
 	private int servingSize;
+	@Lob
 	private String description;
 	private Long length;
 
