@@ -2,6 +2,7 @@ package org.wecancodeit.whendoiboilthewater.controllers;
 
 import java.util.Collection;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,14 +145,31 @@ public class ApiController {
 		String recipeName = json.getString("recipeName");
 		int servingSize = json.getInt("servingSize");
 		String recipeDescription = json.getString("recipeDescription");
+		JSONArray ingredientsArray = json.getJSONArray("ingredientsArray");
+		JSONArray stepsArray = json.getJSONArray("stepArray");
 		Recipe recipe = cookbook.addNewRecipe(recipeName, servingSize, recipeDescription);
+		for (int i = 0; i < ingredientsArray.length(); i++) {
+			String ingredientName = ingredientsArray.getJSONObject(i).getString("ingredientsName");
+			String ingredientQty = ingredientsArray.getJSONObject(i).getString("ingredientsQty");
+			Ingredient ingredient = cookbook.addNewIngredient(ingredientName, ingredientQty);
+			cookbook.addRecipeIngredient(ingredient, recipe);
+			ingredientRepo.save(ingredient);
+		}
+		for (int i = 0; i < stepsArray.length(); i++) {
+			Long secondsToEnd = stepsArray.getJSONObject(i).getLong("secondsToEnd");
+			String stepDescription = stepsArray.getJSONObject(i).getString("stepDescription");
+			Step step = cookbook.addNewStep(secondsToEnd, stepDescription);
+			cookbook.addRecipeStep(step, recipe);
+			stepRepo.save(step);
+		}
+		recipeRepo.save(recipe);
 		return recipe;
 	}
 
 	@PostMapping("/api/recipes/remove")
 	public Collection<Recipe> removeRecipe(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
-		Long recipeId = json.getLong("mealId");
+		Long recipeId = json.getLong("recipeId");
 		recipeRepo.delete(recipeRepo.findById(recipeId).get());
 		return (Collection<Recipe>) recipeRepo.findAll();
 
