@@ -178,7 +178,12 @@ public class ApiController {
 		JSONObject json = new JSONObject(body);
 		Long recipeId = json.getLong("recipeId");
 		Recipe recipe = recipeRepo.findById(recipeId).get();
+		Collection<Meal> meals = mealRepo.findByRecipes(recipe);
 		Collection<Step> steps = recipe.getSteps();
+		for (Meal meal : meals) {
+			meal.removeRecipe(recipe);
+			mealRepo.save(meal);
+		}
 		for (Step step : steps) {
 			stepRepo.delete(step);
 		}
