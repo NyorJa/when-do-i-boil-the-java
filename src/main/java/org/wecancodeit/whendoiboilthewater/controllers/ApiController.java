@@ -151,9 +151,16 @@ public class ApiController {
 		for (int i = 0; i < ingredientsArray.length(); i++) {
 			String ingredientName = ingredientsArray.getJSONObject(i).getString("ingredientsName");
 			String ingredientQty = ingredientsArray.getJSONObject(i).getString("ingredientsQty");
-			Ingredient ingredient = cookbook.addNewIngredient(ingredientName, ingredientQty);
-			cookbook.addRecipeIngredient(ingredient, recipe);
-			ingredientRepo.save(ingredient);
+			Ingredient enteredIngredient = ingredientRepo.findByNameAndQuantityIgnoreCase(ingredientName,
+					ingredientQty);
+			if (enteredIngredient == null) {
+				Ingredient ingredient = cookbook.addNewIngredient(ingredientName, ingredientQty);
+				cookbook.addRecipeIngredient(ingredient, recipe);
+				ingredientRepo.save(ingredient);
+			} else {
+				cookbook.addRecipeIngredient(enteredIngredient, recipe);
+				ingredientRepo.save(enteredIngredient);
+			}
 		}
 		for (int i = 0; i < stepsArray.length(); i++) {
 			Long secondsToEnd = stepsArray.getJSONObject(i).getLong("secondsToEnd");
