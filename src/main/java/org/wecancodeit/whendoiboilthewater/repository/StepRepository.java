@@ -5,4 +5,6 @@ import org.wecancodeit.whendoiboilthewater.model.Step;
 
 public interface StepRepository extends CrudRepository<Step, Long> {
 
+	Step findBySecBeforeEndAndDescriptionIgnoreCase(Long secondsToEnd, String stepDescription);
+
 }

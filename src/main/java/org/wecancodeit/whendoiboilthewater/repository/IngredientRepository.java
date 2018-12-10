@@ -5,4 +5,6 @@ import org.wecancodeit.whendoiboilthewater.model.Ingredient;
 
 public interface IngredientRepository extends CrudRepository<Ingredient, Long> {
 
+	public Ingredient findByNameAndQuantityIgnoreCase(String name, String quantity);
+
 }
