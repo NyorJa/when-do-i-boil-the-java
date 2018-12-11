@@ -12,6 +12,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -22,6 +24,7 @@ public class Recipe {
 	private String name;
 	private int servingSize;
 	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String description;
 	private Long length;
 
