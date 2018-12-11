@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -15,6 +17,7 @@ public class Step {
 	private Long id;
 	private Long secBeforeEnd;
 	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String description;
 	private boolean bypassNotification;
 	@JsonIgnore
