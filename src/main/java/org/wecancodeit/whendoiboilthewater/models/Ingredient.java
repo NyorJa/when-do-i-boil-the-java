@@ -1,4 +1,4 @@
-package org.wecancodeit.whendoiboilthewater.model;
+package org.wecancodeit.whendoiboilthewater.models;
 
 import java.util.Collection;
 import java.util.HashSet;

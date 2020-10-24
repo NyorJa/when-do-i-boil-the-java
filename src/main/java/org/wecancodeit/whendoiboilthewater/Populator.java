@@ -1,18 +1,19 @@
-package org.wecancodeit.whendoiboilthewater;
-
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Service;
-//import org.wecancodeit.whendoiboilthewater.model.Ingredient;
-//import org.wecancodeit.whendoiboilthewater.model.Meal;
-//import org.wecancodeit.whendoiboilthewater.model.Recipe;
-//import org.wecancodeit.whendoiboilthewater.model.Step;
-
-@Service
-public class Populator extends Cookbook implements CommandLineRunner {
-
-	@Override
-	public void run(String... args) throws Exception {
-
+//package org.wecancodeit.whendoiboilthewater;
+//
+//import org.wecancodeit.whendoiboilthewater.models.Ingredient;
+//import org.wecancodeit.whendoiboilthewater.models.Meal;
+//import org.wecancodeit.whendoiboilthewater.models.Recipe;
+//import org.wecancodeit.whendoiboilthewater.models.Step;
+//import org.wecancodeit.whendoiboilthewater.services.RecipeService;
+//import org.springframework.boot.CommandLineRunner;
+//import org.springframework.stereotype.Service;
+//
+//@Service
+//public class Populator extends RecipeService implements CommandLineRunner {
+//
+//	@Override
+//	public void run(String... args) throws Exception {
+//
 //		Ingredient farfalle = addNewIngredient("farfalle");
 //		Ingredient popRocks = addNewIngredient("Pop Rocks");
 //		Ingredient hotDog = addNewIngredient("Hot Dogs");
@@ -80,7 +81,7 @@ public class Populator extends Cookbook implements CommandLineRunner {
 //
 //		addRecipesToMeal(meal1, recipe1, recipe2);
 //		addRecipesToMeal(meal2, recipe3, recipe4);
-
-	}
-
-}
+//
+//	}
+//
+//}

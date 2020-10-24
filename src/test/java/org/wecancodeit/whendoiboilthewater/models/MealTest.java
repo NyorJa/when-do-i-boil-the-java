@@ -1,4 +1,4 @@
-package org.wecancodeit.whendoiboilthewater.model;
+package org.wecancodeit.whendoiboilthewater.models;
 
 import org.junit.Assert;
 import org.junit.Test;

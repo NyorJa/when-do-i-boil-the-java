@@ -1,28 +1,26 @@
-package org.wecancodeit.whendoiboilthewater;
+package org.wecancodeit.whendoiboilthewater.services;
 
 import javax.annotation.Resource;
 
-import org.wecancodeit.whendoiboilthewater.model.Ingredient;
-import org.wecancodeit.whendoiboilthewater.model.Meal;
-import org.wecancodeit.whendoiboilthewater.model.Recipe;
-import org.wecancodeit.whendoiboilthewater.model.Step;
-import org.wecancodeit.whendoiboilthewater.repository.IngredientRepository;
-import org.wecancodeit.whendoiboilthewater.repository.MealRepository;
-import org.wecancodeit.whendoiboilthewater.repository.RecipeRepository;
-import org.wecancodeit.whendoiboilthewater.repository.StepRepository;
+import org.springframework.stereotype.Service;
+import org.wecancodeit.whendoiboilthewater.models.Ingredient;
+import org.wecancodeit.whendoiboilthewater.models.Meal;
+import org.wecancodeit.whendoiboilthewater.models.Recipe;
+import org.wecancodeit.whendoiboilthewater.models.Step;
+import org.wecancodeit.whendoiboilthewater.repositories.IngredientRepository;
+import org.wecancodeit.whendoiboilthewater.repositories.MealRepository;
+import org.wecancodeit.whendoiboilthewater.repositories.RecipeRepository;
+import org.wecancodeit.whendoiboilthewater.repositories.StepRepository;
 
-public class Cookbook {
+@Service
+public class RecipeService {
 
-	@Resource
-	IngredientRepository ingredientRepo;
-	@Resource
-	MealRepository mealRepo;
-	@Resource
-	RecipeRepository recipeRepo;
-	@Resource
-	StepRepository stepRepo;
+	@Resource IngredientRepository ingredientRepo;
+	@Resource MealRepository mealRepo;
+	@Resource RecipeRepository recipeRepo;
+	@Resource StepRepository stepRepo;
 
-	public Cookbook() {
+	public RecipeService() {
 		super();
 	}
 
@@ -55,9 +53,9 @@ public class Cookbook {
 	}
 
 	public void addIngredientsToRecipe(Recipe recipe, Ingredient... ingredientsToAdd) {
-		for (int i = 0; i < ingredientsToAdd.length; i++) {
-			addRecipeIngredient(ingredientsToAdd[i], recipe);
-			ingredientRepo.save(ingredientsToAdd[i]);
+		for (Ingredient ingredient : ingredientsToAdd) {
+			addRecipeIngredient(ingredient, recipe);
+			ingredientRepo.save(ingredient);
 		}
 		recipeRepo.save(recipe);
 	}
@@ -68,9 +66,9 @@ public class Cookbook {
 	}
 
 	public void addStepsToRecipe(Recipe recipe, Step... stepsToAdd) {
-		for (int i = 0; i < stepsToAdd.length; i++) {
-			addRecipeStep(stepsToAdd[i], recipe);
-			stepRepo.save(stepsToAdd[i]);
+		for (Step step : stepsToAdd) {
+			addRecipeStep(step, recipe);
+			stepRepo.save(step);
 		}
 		recipeRepo.save(recipe);
 	}
@@ -81,8 +79,8 @@ public class Cookbook {
 	}
 
 	public void addRecipesToMeal(Meal meal, Recipe... recipesToAdd) {
-		for (int i = 0; i < recipesToAdd.length; i++) {
-			addMealRecipe(recipesToAdd[i], meal);
+		for (Recipe recipe : recipesToAdd) {
+			addMealRecipe(recipe, meal);
 		}
 		mealRepo.save(meal);
 	}
