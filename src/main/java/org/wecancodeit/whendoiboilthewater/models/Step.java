@@ -1,4 +1,4 @@
-package org.wecancodeit.whendoiboilthewater.model;
+package org.wecancodeit.whendoiboilthewater.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
