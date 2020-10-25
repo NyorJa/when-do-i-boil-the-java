@@ -6,6 +6,7 @@ import org.wecancodeit.whendoiboilthewater.models.Recipe;
 import org.wecancodeit.whendoiboilthewater.repositories.MealRepository;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 
 @Service
 public class MealService {
@@ -22,9 +23,7 @@ public class MealService {
     }
 
     public void addRecipesToMeal(Meal meal, Recipe... recipesToAdd) {
-        for (Recipe recipe : recipesToAdd) {
-            addMealRecipe(recipe, meal);
-        }
+        Arrays.stream(recipesToAdd).forEach(recipe -> addMealRecipe(recipe, meal));
         mealRepo.save(meal);
     }
 

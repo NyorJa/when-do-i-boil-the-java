@@ -1,5 +1,6 @@
 package org.wecancodeit.whendoiboilthewater.controllers;
 
+import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.whendoiboilthewater.models.Ingredient;
 import org.wecancodeit.whendoiboilthewater.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Collection;
 
+@RestController
 public class IngredientController {
 
     @Autowired

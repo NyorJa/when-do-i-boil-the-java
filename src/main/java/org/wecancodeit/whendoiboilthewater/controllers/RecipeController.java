@@ -1,5 +1,7 @@
 package org.wecancodeit.whendoiboilthewater.controllers;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.wecancodeit.whendoiboilthewater.repositories.IngredientRepository;
 import org.wecancodeit.whendoiboilthewater.repositories.StepRepository;
 import org.wecancodeit.whendoiboilthewater.services.RecipeService;
@@ -16,6 +18,7 @@ import org.wecancodeit.whendoiboilthewater.repositories.MealRepository;
 import org.wecancodeit.whendoiboilthewater.repositories.RecipeRepository;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @CrossOrigin
 @RestController
@@ -91,17 +94,25 @@ public class RecipeController {
     public Collection<Recipe> removeRecipe(@RequestBody String body) throws JSONException {
         JSONObject json = new JSONObject(body);
         Long recipeId = json.getLong("recipeId");
+        if (!recipeRepo.findById(recipeId).isPresent()) {
+            return Collections.emptyList();
+        }
         Recipe recipe = recipeRepo.findById(recipeId).get();
         Collection<Meal> meals = mealRepo.findByRecipes(recipe);
         Collection<Step> steps = recipe.getSteps();
-        for (Meal meal : meals) {
-            meal.removeRecipe(recipe);
-            mealRepo.save(meal);
+
+        if (!CollectionUtils.isEmpty(meals)) {
+            for (Meal meal : meals) {
+                meal.removeRecipe(recipe);
+                mealRepo.save(meal);
+            }
         }
-        for (Step step : steps) {
-            stepRepo.delete(step);
+        if (!CollectionUtils.isEmpty(steps)) {
+            for (Step step : steps) {
+                stepRepo.delete(step);
+            }
         }
-        recipeRepo.delete(recipeRepo.findById(recipeId).get());
+        recipeRepo.delete(recipe);
         return (Collection<Recipe>) recipeRepo.findAll();
 
     }

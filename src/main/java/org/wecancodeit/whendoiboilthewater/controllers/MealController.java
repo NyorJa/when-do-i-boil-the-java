@@ -1,5 +1,6 @@
 package org.wecancodeit.whendoiboilthewater.controllers;
 
+import org.springframework.util.CollectionUtils;
 import org.wecancodeit.whendoiboilthewater.services.MealService;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +12,8 @@ import org.wecancodeit.whendoiboilthewater.repositories.MealRepository;
 import org.wecancodeit.whendoiboilthewater.repositories.RecipeRepository;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -30,12 +33,16 @@ public class MealController {
 
     @GetMapping("/api/meals/{mealId}")
     public Meal showMeal(@PathVariable(value = "mealId") Long mealId) {
-        return mealRepo.findById(mealId).get();
+        return Optional.ofNullable(mealRepo.findById(mealId)).get().orElse(null);
     }
 
     @GetMapping("/api/meals/{mealId}/recipes")
     public Collection<Recipe> showMealRecipes(@PathVariable(value = "mealId") Long mealId) {
-        return mealRepo.findById(mealId).get().getRecipes();
+        if (mealRepo.findById(mealId).isPresent()) {
+            Meal meal = mealRepo.findById(mealId).get();
+            return CollectionUtils.isEmpty(meal.getRecipes()) ? Collections.emptyList() : meal.getRecipes();
+        }
+        return Collections.emptyList();
     }
 
     @GetMapping("/api/meals/{mealId}/recipes/{recipeId}")

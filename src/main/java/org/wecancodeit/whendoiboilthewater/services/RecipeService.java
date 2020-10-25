@@ -12,6 +12,8 @@ import org.wecancodeit.whendoiboilthewater.repositories.MealRepository;
 import org.wecancodeit.whendoiboilthewater.repositories.RecipeRepository;
 import org.wecancodeit.whendoiboilthewater.repositories.StepRepository;
 
+import java.util.Arrays;
+
 @Service
 public class RecipeService {
 
@@ -79,14 +81,7 @@ public class RecipeService {
 	}
 
 	public void addRecipesToMeal(Meal meal, Recipe... recipesToAdd) {
-		for (Recipe recipe : recipesToAdd) {
-			addMealRecipe(recipe, meal);
-		}
+		Arrays.stream(recipesToAdd).forEach(recipe -> meal.addRecipe(recipe));
 		mealRepo.save(meal);
 	}
-
-	public void addMealRecipe(Recipe recipeToAdd, Meal mealToAddRecipeTo) {
-		mealToAddRecipeTo.addRecipe(recipeToAdd);
-	}
-
 }
